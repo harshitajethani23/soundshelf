@@ -1,8 +1,13 @@
 import axios from "axios";
-import {useEffect,useState} from "react";
-import SongCard from "../components/SongCard"
 import {Search} from "lucide-react";
-import toast, {Toaster} from "react-hot-toast"
+import {useEffect,useState} from "react";
+import toast, {Toaster} from "react-hot-toast";
+import SongCard from "../components/SongCard";
+import { API_BASE_URL } from "./../constants";
+
+
+
+
 function Home() {
 
     const [song,setSong] = useState([]);
@@ -10,7 +15,7 @@ function Home() {
     const [error,setError] = useState("");
 
     const loadSongs = async () => {
-        const response = await axios.get("http://localhost:8080/song");
+        const response = await axios.get(`${API_BASE_URL}/song`);
         setSong(response.data.data);
     };
 
@@ -22,7 +27,7 @@ function Home() {
         toast.loading("Searching...",{id: "Searching" });
 
         try{
-        const response = await axios.get(`http://localhost:8080/song/search?q=${search}`);
+        const response = await axios.get(`${API_BASE_URL}/song/search?q=${search}`);
         toast.dismiss();
         setSong(response.data.data);
         setError("");
@@ -53,13 +58,11 @@ function Home() {
 
             {error ? <div className="text-center text-3xl mt-4">{error}</div>:null}
         <div className="flex flex-wrap justify-around">
-            {song.map((songObj)=>{
+            {song?.map((songObj)=>{
             const {_id, title,image,raag} = songObj;
             return <SongCard key={_id}
             title={title}
             image={image}
-         
-           
             raag={raag}
             />
         
