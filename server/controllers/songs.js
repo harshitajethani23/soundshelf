@@ -13,6 +13,8 @@ const getSongs = async(req,res)=>{
     console.log(req.body);
     const {
          title,
+        
+        image,
         description,
         singer,
         composer,
@@ -21,8 +23,12 @@ const getSongs = async(req,res)=>{
         raag
     } = req.body;
 
+    try{
+
     const newSong = new Song({
          title,
+        
+        image,
         description,
         singer,
         composer,
@@ -33,11 +39,19 @@ const getSongs = async(req,res)=>{
 
     const savedSong = await newSong.save();
 
-    res.json({
+    res.status(201).json({
         success:true,
         data:savedSong,
         message:"songs added successfully"
-    })
+    });
+}
+catch(error) {
+    res.status(400).json({
+        success:false,
+        data:null,
+        message:"Error adding movie:"+error.message,
+    });
+};
     
 }
 
@@ -96,6 +110,7 @@ const putSongById = async(req,res)=>{
 
       const {
           title,
+          image,
         description,
         singer,
         composer,
@@ -107,6 +122,7 @@ const putSongById = async(req,res)=>{
      await Song.updateOne({_id:id},
         {
              title,
+             image,
         description,
         singer,
         composer,
@@ -123,18 +139,27 @@ return res.json({
     message:"song updated successfully"
 });
 };
-const putRaagById = async (req,res)=>{
+const putTitleById = async (req,res)=>{
     const {id} =req.params;
 
-    const {raag} = req.body;
-    await Song.updateOne({_id:id},{raag});
+    const {title} = req.body;
+    await Song.updateOne({_id:id},{title});
 
     const updatedSong= await Song.findById(id);
     return res.json({
         success:true,
         data:updatedSong,
-        message:"song raag updated successfully",
+        message:"song title updated successfully",
+    })
+};
+const deleteSongById = async(req,res)=> {
+    const {id} = req.params;
+    await Song.deleteOne({_id:id});
+    return res.json({
+        success:true,
+        data:null,
+        message:"song deleted successfully"
     })
 }
 
-export { getSongs,postSongs,getSongById,getSongsSearch,putSongById,putRaagById }
+export { getSongs,postSongs,getSongById,getSongsSearch,putSongById,putTitleById,deleteSongById }

@@ -3,8 +3,8 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 dotenv.config();
-import Song from "./models/Songs.js";
-import { getSongs,postSongs,getSongById,getSongsSearch,putSongById,putRaagById } from "./controllers/songs.js"
+
+import { getSongs,postSongs,getSongById,getSongsSearch,putSongById,putTitleById,deleteSongById } from "./controllers/songs.js"
 
 
 const app = express();
@@ -38,7 +38,8 @@ app.post("/song",postSongs);
  app.get("/song/search",getSongsSearch);
  app.get("/song/:id",getSongById);
  app.put("/song/:id",putSongById);
- app.patch("/song/:id/raag",putRaagById)
+ app.patch("/song/:id/title",putTitleById);
+ app.delete("/song/:id",deleteSongById);
 
 
 
