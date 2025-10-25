@@ -61,7 +61,7 @@ function Home() {
         <div className="flex flex-wrap justify-around">
             {songs.map((songObj)=>{
             const {_id, title,image,singer} = songObj;
-            
+
             return (
             <SongCard 
             _id={_id}
@@ -69,6 +69,7 @@ function Home() {
             title={title}
             image={image}
             singer={singer}
+            loadSongs={loadSongs}
             /> )
         
        } )}
