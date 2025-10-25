@@ -3,20 +3,20 @@ import {Search} from "lucide-react";
 import {useEffect,useState} from "react";
 import toast, {Toaster} from "react-hot-toast";
 import SongCard from "../components/SongCard";
-import { API_BASE_URL } from "./../constants";
+import { API_BASE_URL } from "./../constants.js";
 
 
 
 
 function Home() {
 
-    const [song,setSong] = useState([]);
+    const [songs,setSongs] = useState([]);
     const [search,setSearch] = useState("");
     const [error,setError] = useState("");
 
     const loadSongs = async () => {
         const response = await axios.get(`${API_BASE_URL}/song`);
-        setSong(response.data.data);
+        setSongs(response.data.data);
     };
 
     useEffect(()=> {
@@ -29,13 +29,13 @@ function Home() {
         try{
         const response = await axios.get(`${API_BASE_URL}/song/search?q=${search}`);
         toast.dismiss();
-        setSong(response.data.data);
+        setSongs(response.data.data);
         setError("");
         } catch(error) {
             console.log(error);
             toast.dismiss();
             toast.error(error.response.data.message, {id:"error"});
-            setSong([]);
+            setSongs([]);
             setError(error.response.data.message);
         }
     };
@@ -57,14 +57,19 @@ function Home() {
             </div>
 
             {error ? <div className="text-center text-3xl mt-4">{error}</div>:null}
+
         <div className="flex flex-wrap justify-around">
-            {song.map((songObj)=>{
+            {songs.map((songObj)=>{
             const {_id, title,image,singer} = songObj;
-            return <SongCard key={_id}
+            
+            return (
+            <SongCard 
+            _id={_id}
+            key={_id}
             title={title}
             image={image}
             singer={singer}
-            />
+            /> )
         
        } )}
        </div>
