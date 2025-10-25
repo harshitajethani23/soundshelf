@@ -60,7 +60,7 @@ function Home() {
 
         <div className="flex flex-wrap justify-around">
             {songs.map((songObj)=>{
-            const {_id, title,image,singer} = songObj;
+            const {_id, title,image,singer,loadSongs} = songObj;
 
             return (
             <SongCard 
