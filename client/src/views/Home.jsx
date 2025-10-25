@@ -58,12 +58,12 @@ function Home() {
 
             {error ? <div className="text-center text-3xl mt-4">{error}</div>:null}
         <div className="flex flex-wrap justify-around">
-            {song?.map((songObj)=>{
-            const {_id, title,image,raag} = songObj;
+            {song.map((songObj)=>{
+            const {_id, title,image,singer} = songObj;
             return <SongCard key={_id}
             title={title}
             image={image}
-            raag={raag}
+            singer={singer}
             />
         
        } )}
