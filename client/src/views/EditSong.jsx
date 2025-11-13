@@ -1,13 +1,17 @@
 import axios from "axios";
 import { SquarePlus,Trash } from "lucide-react";
-import {useState} from "react";
-import toast,{Toaster} from "react-hot-toast"
+import {useState,useEffect} from "react";
+import toast,{Toaster} from "react-hot-toast";
+import {useParams} from "react-router";
 import { API_BASE_URL } from "../constants";
 
 
-function NewSong() {
+function EditSong() {
+
+    const { id } = useParams;
 
     const [SongDetail,setSongDetail] = useState({
+        _id:"",
         title:"",
         description:"",
         image:[],
@@ -21,17 +25,28 @@ function NewSong() {
 
     const [newSongPoster , setNewSongPoster] = useState("");
 
-    const addSong = async () => {
-        const response = await axios.post(`${API_BASE_URL}/song`,SongDetail);
+    const updateSong = async () => {
+        const response = await axios.put(`${API_BASE_URL}/song/${id}`,SongDetail);
         toast.success(response.data.message);
 
         setTimeout(()=> {
             window.location.href = "/";
         }, 1500);
     };
+
+    const loadSongDetails = async () => {
+        const response = await axios.get(`${API_BASE_URL}/song/${id}`);
+        setSongDetail(response.data.data);
+
+        console.log(response.data.data);
+    };
+
+    useEffect(()=>{
+        loadSongDetails();
+    },[id]);
     return (
      <div className="p-6 max-w-3xl mx-auto bg-white rounded-lg shadow-md space-y-6">
-  <h1 className="text-2xl font-bold text-gray-800 mb-4">Add New Song</h1>
+  <h1 className="text-2xl font-bold text-gray-800 mb-4">Edit Song</h1>
 
  
   <input
@@ -138,9 +153,9 @@ function NewSong() {
   
   <button
     className="w-full bg-black text-white py-2 rounded-md font-semibold "
-    onClick={addSong}
+    onClick={updateSong}
   >
-    Add Song
+    Edit Song
   </button>
 
             <Toaster />
@@ -148,4 +163,4 @@ function NewSong() {
     );
 }
 
-export default NewSong
+export default EditSong

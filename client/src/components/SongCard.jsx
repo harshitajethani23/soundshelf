@@ -14,9 +14,9 @@ function SongCard({_id, title,image,singer,loadSongs}) {
 
     return (
     <Link to={`/song/${_id}`} 
-    className="m-4 shadow-lg w-[350px] rounded-md relative">
+    className="m-8 shadow-lg w-[350px] rounded-md relative">
         <h2 className="absolute top-3 text-white text-4xl ml-2 ">{title}
-            <Trash className="text-blue inline-block absolute top-3 left-12" onClick={(e)=>{deleteSong();
+            <Trash className="text-blue inline-block absolute top-3 right-3" onClick={(e)=>{deleteSong();
                 e.preventDefault();
                 e.stopPropagation();
             }}/>

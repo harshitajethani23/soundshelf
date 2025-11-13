@@ -58,7 +58,7 @@ function Home() {
 
             {error ? <div className="text-center text-3xl mt-4">{error}</div>:null}
 
-        <div className="flex flex-wrap justify-around bg-black text-white">
+        <div className="flex flex-wrap justify-around bg-black text-white m-5">
             {songs.map((songObj)=>{
             const {_id, title,image,singer,loadSongs} = songObj;
 
