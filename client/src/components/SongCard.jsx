@@ -18,16 +18,15 @@ function SongCard({_id, title,image,singer,loadSongs}) {
   className="relative w-[150px] h-[180px] shadow-lg rounded-md overflow-hidden"
 >
  
-  <button
+  <Trash
     onClick={(e) => {
       e.preventDefault();
       e.stopPropagation();
       deleteSong();
     }}
-    className="absolute top-2 right-2 bg-white text-white p-1.5 rounded-full"
-  >
-    <Trash className="w-4 h-4" />
-  </button>
+    className="absolute top-2 right-2 bg-white text-white p-1.5 rounded-full w-4 h-4"
+  />
+   
 
  
   <img
