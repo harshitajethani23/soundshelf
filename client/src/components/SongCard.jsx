@@ -14,7 +14,7 @@ function SongCard({_id, title,image,singer,loadSongs}) {
 
     return (
    <Link
-  to={`/song/${id}`}
+  to={`/song/${_id}`}
   className="relative w-[150px] h-[180px] shadow-lg rounded-md overflow-hidden"
 >
  
