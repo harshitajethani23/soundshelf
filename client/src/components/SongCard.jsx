@@ -13,32 +13,24 @@ function SongCard({_id, title,image,singer,loadSongs}) {
     };
 
     return (
-   <Link
-  to={`/song/${_id}`}
-  className="relative w-[150px] h-[180px] shadow-lg rounded-md overflow-hidden"
->
- 
-  <Trash
-    onClick={(e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      deleteSong();
-    }}
-    className="absolute top-2 right-2 bg-white text-white p-1.5 rounded-full w-4 h-4"
-  />
-   
+        <Link to={`/song/${_id}`}
+        className="m-4 shadow-lg w-[300px] rounded-md relative"
+        key={_id}>
+            <img src={image} className="w-full h-[400px] object-cover rounded-md" />
+            <h2 className="absolute top-0 text-white text-4xl ml-2 w-full p-2">{title}
+                <Trash className="inline-block text-white absolute top-3 right-3"
+                onClick={(e)=>{
+                    deleteSong();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }}
+                />
+                  </h2>
 
- 
-  <img
-    src={image}
-    alt={title}
-    className="w-full h-full object-cover"
-  />
-
-
-  <p className="text-center text-white text-sm mt-2">{title}</p>
-  <p className="text-center text-white text-xs mb-2">Singer: {singer}</p>
-</Link>)
+                <span className="text-center text-white text-2xl mb-2">Singer: {singer}</span>
+          
+        </Link>
+ )
 }
 
 export default SongCard;
