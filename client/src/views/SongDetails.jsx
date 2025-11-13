@@ -39,6 +39,7 @@ function SongDetails() {
                     <div>
                         <h1>{SongDetail.title}</h1>
                         <h1>{SongDetail.year}</h1>
+                        <p>{SongDetail.description}</p>
                     </div>
             </div>
             </div>
