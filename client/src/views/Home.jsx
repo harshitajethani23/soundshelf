@@ -74,8 +74,13 @@ function Home() {
         
        } )}
        </div>
+       <div>
           <Toaster position="top-right"/>
-       </div>
+           </div> 
+           <Link to="{/new}"  className="w-full bg-white text-black py-2 px-3 mt-2 rounded-md font-semibold">Add Song</Link>
+      </div>
+        
+      
     
      )
     
